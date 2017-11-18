@@ -30,6 +30,7 @@ mongodb的设置和配置
   安装Xftp，输入用户名、密码、IP 
 
 可视化
+  robomongo
   https://github.com/magicdict/MongoCola
 
 /root/mongodb/etc/mongo.conf 配置文件
