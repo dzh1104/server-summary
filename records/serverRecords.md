@@ -44,3 +44,12 @@ mongodb的设置和配置
 
 如何关闭已开启的可后台运行的mongodb
   kill PID 1209(PID可通过双击当前会话标签页再开一个 然后输入netstat -tnlp查看)
+
+Mac上如何上传下载文件到远程服务器
+  上传  scp ./.js root@101.132.163.194:/root
+  下载  scp -r root@101.132.163.194:/root/app.js /dingzhaohua/server-summary/src
+
+Mac上安装mongodb和使用
+  brew update
+  brew install mongodb
+  启动mongodb : mongod —config /usr/local/etc/mongod.conf
