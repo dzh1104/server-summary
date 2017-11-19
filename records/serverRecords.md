@@ -53,3 +53,6 @@ Mac上安装mongodb和使用
   brew update
   brew install mongodb
   启动mongodb : mongod —config /usr/local/etc/mongod.conf
+
+本地开发开启mongodb服务
+  windows mongod --dbpath=D:\mongodb\db --port=27017

@@ -1,10 +1,26 @@
 const Koa = require('koa');
 const path = require('path');
 const serve = require('koa-static');
+const mongoose = require('mongoose');
+const bodyParser = require('koa-bodyparser');
+const DB_URL = 'mongodb://localhost:27017/mongosesample';
+
+mongoose.createConnection(DB_URL, {
+  useMongoClient: true,
+  promiseLibrary: require('bluebird')
+}, err => {
+  if (err) {
+    console.log('数据库连接失败');
+  } else {
+    console.log('数据库连接成功');
+  }
+});
 
 const app = new Koa();
 
 const controller = require('../controller');
+
+app.use(bodyParser()); //ctx.request.body.data取得数据
 
 app.use(serve(path.resolve(__dirname, '../../client-summary/dist')));
 
