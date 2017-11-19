@@ -22,6 +22,7 @@
     change to directory DIR
   rm -rf DIR 删除文件夹
   netstat -tnlp 查看当前服务状态
+  export PATH=$PATH:/usr/local/mongodb-linux-x86_64-amazon-3.4.10/bin 等同于同时完成下面
 
 mongodb的设置和配置
   http://www.jianshu.com/p/f2a407cbd612
