@@ -21,6 +21,7 @@ module.exports = {
      *  
      */
     'post /login/register': async (ctx, next) => {
+        console.log('进入/login/register');
         const body = ctx.request.body.data;
         const username = body.username;
         const password = body.password;
@@ -52,7 +53,7 @@ module.exports = {
         User.findOne({
             username
         }).then(userInfo => {
-            console.log('userInfo', userInfo);
+            console.log('userInfo1', userInfo);
             if (userInfo) {
                 //表示数据库中有该记录
                 resp.code = 1;
@@ -65,11 +66,13 @@ module.exports = {
                 username,
                 password
             });
+            console.log('user', user);
             return user.save();
         }).then(newUserInfo => {
-            console.log('newUserInfo', newUserInfo);
             resp.message = '注册成功';
             ctx.body = resp;
+            console.log('newUserInfo2', newUserInfo);
+            return;
         })
     }
 };

@@ -5,9 +5,10 @@ const mongoose = require('mongoose');
 const bodyParser = require('koa-bodyparser');
 const DB_URL = 'mongodb://localhost:27017/mongosesample';
 
-mongoose.createConnection(DB_URL, {
-  useMongoClient: true,
-  promiseLibrary: require('bluebird')
+global.Promise = require('bluebird');
+
+mongoose.connect(DB_URL, {
+  useMongoClient: true
 }, err => {
   if (err) {
     console.log('数据库连接失败');
