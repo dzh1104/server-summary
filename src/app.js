@@ -33,7 +33,7 @@ const app = new Koa();
 app.use(async (ctx, next) => {
   const start = Date.now();
   await next();
-  const ms = Data.now() - start;
+  const ms = Date.now() - start;
   console.log(`${ctx.methods} ${ctx.url} - ${ms} ms`);
 });
 
