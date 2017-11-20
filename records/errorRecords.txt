@@ -1,0 +1,6 @@
+网站无法正常工作的原因总结：
+    1.ECS安全组配置，相应的端口不被允许
+    2.服务端代码并非最新的
+    3.一些语法错误(module.exports module.exprts)
+    4.koa语法async/await异步解决方案
+    5.端口冲突(netstat -tnlp / kill pid / pm2 kill)
