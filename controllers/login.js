@@ -18,9 +18,6 @@ module.exports = {
      *  
      */
     'post /login/register': async(ctx, next) => {
-        ctx.body = {
-            message: '进入到register'
-        };
         console.log('进入/login/register');
         const body = ctx.request.body.data;
         const username = body.username;

@@ -26,7 +26,14 @@ mongoose.connect(DB_URL, {
   console.log('数据库连接成功');
 }).catch(err => {
   console.log('数据库连接失败');
-})
+});
+
+app.use(async (ctx, next) => {
+  const start = Date.now();
+  await next();
+  const ms = Data.now() - start;
+  console.log(`${ctx.methods} ${ctx.url} - ${ms} ms`);
+});
 
 const db = mongoose.connection;
 
