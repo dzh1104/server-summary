@@ -67,10 +67,12 @@ module.exports = {
                 password
             });
             console.log('user', user);
-            let newUserInfo;
-            (async() => {
-                newUserInfo = await user.save();
-            })();
+            // let newUserInfo;
+            // (async() => {
+            //     newUserInfo = await user.save();
+            // })();
+            let newUserInfo = user.save();
+            console.log('newUserInfo---save', newUserInfo);
             return newUserInfo;
         }).then(newUserInfo => {
             if (newUserInfo) {

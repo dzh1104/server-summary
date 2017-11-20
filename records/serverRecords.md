@@ -59,6 +59,8 @@ Mac上安装mongodb和使用
   windows 
     启动
     mongod --auth --dbpath=D:\mongodb\db --port=27017
+  使用配置启动
+    mongod --config mongo.config(这个文件在mongod程序同一目录)
 
 mongodb错误集合
   1、Access control is not enabled for the database
@@ -86,4 +88,3 @@ mongodb错误集合
           user: 'dzh',
           pass: '333333'
         })
-
