@@ -28,6 +28,8 @@ mongoose.connect(DB_URL, {
   console.log('数据库连接失败');
 });
 
+const app = new Koa();
+
 app.use(async (ctx, next) => {
   const start = Date.now();
   await next();
@@ -37,7 +39,6 @@ app.use(async (ctx, next) => {
 
 const db = mongoose.connection;
 
-const app = new Koa();
 
 const controller = require('../controller');
 
