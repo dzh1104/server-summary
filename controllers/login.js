@@ -82,5 +82,9 @@ module.exports = {
                 console.log('newUserInfo2', newUserInfo);
             }
         })
+    },
+    'post /login/test': async(ctx, next) => {
+        const body = ctx.request.body.data;
+        ctx.body = body;
     }
 };
