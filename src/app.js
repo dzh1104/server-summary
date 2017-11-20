@@ -3,7 +3,7 @@ const path = require('path');
 const serve = require('koa-static');
 const mongoose = require('mongoose');
 const bodyParser = require('koa-bodyparser');
-const DB_URL = 'mongodb://localhost:27017/dzh';
+const DB_URL = 'mongodb://localhost:27017/test';
 
 global.Promise = require('bluebird');
 mongoose.Promise = global.Promise;
