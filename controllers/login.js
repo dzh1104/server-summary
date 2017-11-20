@@ -84,7 +84,7 @@ module.exports = {
         })
     },
     'post /login/test': async(ctx, next) => {
-        const body = ctx.request.body.data;
+        const body = ctx.request.body;
         ctx.body = body;
     }
 };
