@@ -56,4 +56,34 @@ Mac上安装mongodb和使用
   mongod --config /usr/local/etc/mongod.conf
 
 本地开发开启mongodb服务
-  windows mongod --dbpath=D:\mongodb\db --port=27017
+  windows 
+    启动
+    mongod --auth --dbpath=D:\mongodb\db --port=27017
+
+mongodb错误集合
+  1、Access control is not enabled for the database
+  解决：http://blog.csdn.net/q1056843325/article/details/70941697
+  实现：创建一个安全的数据库，必须要进行验证 
+        user admin
+        db.createUser({ 
+          user: 'dzh',
+          pwd: '333333',
+          roles: [
+            {
+              role: 'userAdminAnyDatabase',
+              db: 'mongosesample'
+            }
+          ]
+        })
+        重启mongodb服务器
+        mongod --auth --port 27017 --dbpath=D:\mongodb\db
+
+        shell客户端连接并认证
+        mongo --port 27017 -u 'dzh' -p '333333' --authenticationDatabase 'mongoosesample'
+
+        mongoose连接
+        mongoose.createConnection('localhost', 'mongoosesample', 27107, {
+          user: 'dzh',
+          pass: '333333'
+        })
+

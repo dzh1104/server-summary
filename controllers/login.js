@@ -67,12 +67,18 @@ module.exports = {
                 password
             });
             console.log('user', user);
-            return user.save();
+            let newUserInfo;
+            (async() => {
+                newUserInfo = await user.save();
+            })();
+            return newUserInfo;
         }).then(newUserInfo => {
-            resp.message = '注册成功';
-            ctx.body = resp;
-            console.log('newUserInfo2', newUserInfo);
-            return;
+            if (newUserInfo) {
+                resp.code = 0;
+                resp.message = '注册成功';
+                ctx.body = resp;
+                console.log('newUserInfo2', newUserInfo);
+            }
         })
     }
 };
