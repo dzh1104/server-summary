@@ -6,6 +6,7 @@ const bodyParser = require('koa-bodyparser');
 const DB_URL = 'mongodb://localhost:27017/mongosesample';
 
 global.Promise = require('bluebird');
+mongoose.Promise = global.Promise;
 
 mongoose.connect(DB_URL, {
   useMongoClient: true
@@ -17,6 +18,8 @@ mongoose.connect(DB_URL, {
   }
 });
 
+const db = mongoose.connection;
+
 const app = new Koa();
 
 const controller = require('../controller');
@@ -27,4 +30,5 @@ app.use(serve(path.resolve(__dirname, '../../client-summary/dist')));
 
 app.use(controller());
 
-module.exports = app;
+exports.app = app;
+exports.db = db;

@@ -4,9 +4,6 @@ const resp = {
     message: ''
 };
 
-//引入数据库的model
-const User = require('../models/User');
-
 module.exports = {
     /**
      * @description 
@@ -20,7 +17,7 @@ module.exports = {
      *  用户名是否被注册
      *  
      */
-    'post /login/register': async (ctx, next) => {
+    'post /login/register': async(ctx, next) => {
         console.log('进入/login/register');
         const body = ctx.request.body.data;
         const username = body.username;
@@ -49,8 +46,11 @@ module.exports = {
             return;
         }
 
+        //引入数据库的model，不可以在进入这个接口之前引入，会报错，db是undefined
+        const User = require('../models/User');
+
         //用户名已被注册(数据库查询)
-        User.findOne({
+        await User.findOne({
             username
         }).then(userInfo => {
             console.log('userInfo1', userInfo);
