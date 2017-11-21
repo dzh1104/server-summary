@@ -5,6 +5,49 @@ const resp = {
 };
 
 module.exports = {
+    'post /login/login': async (ctx, next) => {
+        let body = ctx.request.body.data;
+        let username = body.username;
+        let password = body.password;
+
+        if (username === '') {
+            resp.code = 1;
+            resp.message = '用户名不能为空';
+            ctx.body = resp;
+            return;
+        }
+
+        if (password === '') {
+            resp.code = 1;
+            resp.message = '密码不能为空';
+            ctx.body = resp;
+            return;
+        }
+
+        const User = require('../models/User');
+
+        await User.findOne({
+            username
+        }).then(userInfo => {
+            if (!userInfo) {
+                resp.code = 1;
+                resp.message = '用户不存在';
+                ctx.body = resp;
+                return;
+            }
+            if (password !== userInfo.password) {
+                resp.code = 1;
+                resp.message = '密码错误';
+                ctx.body = resp;
+                return;
+            } else {
+                resp.code = 0;
+                resp.message = '登录成功';
+                ctx.body = resp;
+                return;
+            }
+        })
+    },
     /**
      * @description 
      *  用户注册逻辑
@@ -17,14 +60,14 @@ module.exports = {
      *  用户名是否被注册
      *  
      */
-    'post /login/register': async(ctx, next) => {
-        console.log('进入/login/register');
+    'post /login/regist': async(ctx, next) => {
+        console.log('进入/login/regist');
         const body = ctx.request.body.data;
         const username = body.username;
         const password = body.password;
         const repassword = body.repassword;
 
-        //判断是否为空
+        //判断用户名是否为空
         if (username === '') {
             resp.code = 1;
             resp.message = '用户名不能为空';
