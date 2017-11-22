@@ -52,7 +52,7 @@
   brew update
   brew install mongodb
   启动mongodb : 
-  mongod --config /usr/local/etc/mongod.conf
+  mongod --config /usr/local/etc/mongod.conf(在~ dingzhaohua这个路径下)
 
 ## 本地开发开启mongodb服务
   windows 

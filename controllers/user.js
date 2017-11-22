@@ -5,7 +5,7 @@ const resp = {
 };
 
 module.exports = {
-    'post /login/login': async (ctx, next) => {
+    'post /user/login': async (ctx, next) => {
         let body = ctx.request.body.data;
         let username = body.username;
         let password = body.password;
@@ -60,7 +60,7 @@ module.exports = {
      *  用户名是否被注册
      *  
      */
-    'post /login/regist': async(ctx, next) => {
+    'post /user/regist': async(ctx, next) => {
         console.log('进入/login/regist');
         const body = ctx.request.body.data;
         const username = body.username;
@@ -125,9 +125,5 @@ module.exports = {
                 console.log('newUserInfo2', newUserInfo);
             }
         })
-    },
-    'post /login/test': async(ctx, next) => {
-        const body = ctx.request.body.data;
-        ctx.body = body;
     }
 };
