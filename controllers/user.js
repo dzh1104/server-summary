@@ -4,7 +4,8 @@ const {
 
 module.exports = {
     'post /user/login': async(ctx, next) => {
-        let body = ctx.request.body.data;
+        let body = ctx.getReqData();
+        console.log('post /user/login body', body);
         let username = body.username;
         let password = body.password;
 
@@ -98,5 +99,20 @@ module.exports = {
                 console.log('newUserInfo2', newUserInfo);
             }
         })
+    },
+    'get /user': async (ctx, next) => {
+        let query = ctx.query;
+        console.log('get query', query);
+        ctx.rest(query);
+    },
+    'put /user': async (ctx, next) => {
+        let body = ctx.request.body.data;
+        console.log('put body', body);
+        ctx.rest(body);
+    },
+    'delete /user': async (ctx, next) => {
+        let query = ctx.query;
+        console.log('delete query', query);
+        ctx.rest(query);
     }
 };
