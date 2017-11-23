@@ -27,9 +27,9 @@ module.exports = {
             if (password !== userInfo.password) {
                 throw new ApiError(1004);
             } else {
-                ctx.body = {
+                ctx.rest({
                     message: '登录成功'
-                };
+                })
             }
         })
     },
@@ -54,24 +54,15 @@ module.exports = {
 
         //判断用户名是否为空
         if (username === '') {
-            resp.code = 1;
-            resp.message = '用户名不能为空';
-            ctx.body = resp;
-            return;
+            throw new ApiError(1001);
         }
         //密码不能为空
         if (password === '') {
-            resp.code = 1;
-            resp.message = '密码不能为空';
-            ctx.body = resp;
-            return;
+            throw new ApiError(1002);
         }
         //两次输入的密码不一致
         if (password !== repassword) {
-            resp.code = 1;
-            resp.message = '两次输入的密码不一致';
-            ctx.body = resp;
-            return;
+            throw new ApiError(1005);
         }
 
         //引入数据库的model，不可以在进入这个接口之前引入，会报错，db是undefined
@@ -84,10 +75,7 @@ module.exports = {
             console.log('userInfo1', userInfo);
             if (userInfo) {
                 //表示数据库中有该记录
-                resp.code = 1;
-                resp.message = '用户名已被注册';
-                ctx.body = resp;
-                return;
+                throw new ApiError(1000);
             }
             //保存用户注册的信息到数据库中
             const user = new User({
@@ -104,9 +92,9 @@ module.exports = {
             return newUserInfo;
         }).then(newUserInfo => {
             if (newUserInfo) {
-                resp.code = 0;
-                resp.message = '注册成功';
-                ctx.body = resp;
+                ctx.rest({
+                    message: '注册成功'
+                })
                 console.log('newUserInfo2', newUserInfo);
             }
         })

@@ -24,6 +24,10 @@ const mapErrorCode = new Map([
     [1004, {
         zhmsg: '密码错误',
         enmsg: ''
+    }],
+    [1005, {
+        zhmsg: '两次输入密码不一致',
+        enmsg: ''
     }]
 ]);
 
