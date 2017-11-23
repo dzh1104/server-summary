@@ -57,7 +57,7 @@
 ## 本地开发开启mongodb服务
   windows 
     启动
-    mongod --auth --dbpath=D:\mongodb\db --port=27017
+    mongod --dbpath=D:\mongodb\db --port=27017
   使用配置启动
     mongod --config mongo.config(这个文件在mongod程序同一目录)
 
