@@ -2,9 +2,14 @@ const Koa = require('koa');
 const path = require('path');
 const serve = require('koa-static');
 const mongoose = require('mongoose');
+const controller = require('../controller');
 const bodyParser = require('koa-bodyparser');
-const DB_URL = 'mongodb://localhost:27017/test';
+const {
+  restify
+} = require('../middlewares/rest');
 
+const DB_URL = 'mongodb://localhost:27017/test';
+//使用bluebird mongoose支持promise
 global.Promise = require('bluebird');
 mongoose.Promise = global.Promise;
 
@@ -12,12 +17,11 @@ mongoose.Promise = global.Promise;
 //   useMongoClient: true
 // }, err => {
 //   if (err) {
-//     console.log('数据库连接失败');
+  //     console.log('数据库连接失败');
 //   } else {
 //     console.log('数据库连接成功');
 //   }
 // });
-
 
 //promise语法
 mongoose.connect(DB_URL, {
@@ -27,22 +31,20 @@ mongoose.connect(DB_URL, {
 }).catch(err => {
   console.log('数据库连接失败');
 });
+const db = mongoose.connection;
 
 const app = new Koa();
 
-app.use(async (ctx, next) => {
+app.use(async(ctx, next) => {
   const start = Date.now();
   await next();
   const ms = Date.now() - start;
   console.log(`${ctx.methods} ${ctx.url} - ${ms} ms`);
 });
 
-const db = mongoose.connection;
+app.use(restify()); // bind .rest() for ctx:
 
-
-const controller = require('../controller');
-
-app.use(bodyParser()); //ctx.request.body.data取得数据
+app.use(bodyParser()); // ctx.request.body.data取得数据
 
 app.use(serve(path.resolve(__dirname, '../../client-summary/dist')));
 

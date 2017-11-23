@@ -1,27 +1,19 @@
-//统一返回格式
-const resp = {
-    code: 0,
-    message: ''
-};
+const {
+    ApiError
+} = require('../errorCode');
 
 module.exports = {
-    'post /user/login': async (ctx, next) => {
+    'post /user/login': async(ctx, next) => {
         let body = ctx.request.body.data;
         let username = body.username;
         let password = body.password;
 
         if (username === '') {
-            resp.code = 1;
-            resp.message = '用户名不能为空';
-            ctx.body = resp;
-            return;
+            throw new ApiError(1001);
         }
 
         if (password === '') {
-            resp.code = 1;
-            resp.message = '密码不能为空';
-            ctx.body = resp;
-            return;
+            throw new ApiError(1002);
         }
 
         const User = require('../models/User');
@@ -30,21 +22,14 @@ module.exports = {
             username
         }).then(userInfo => {
             if (!userInfo) {
-                resp.code = 1;
-                resp.message = '用户不存在';
-                ctx.body = resp;
-                return;
+                throw new ApiError(1003);
             }
             if (password !== userInfo.password) {
-                resp.code = 1;
-                resp.message = '密码错误';
-                ctx.body = resp;
-                return;
+                throw new ApiError(1004);
             } else {
-                resp.code = 0;
-                resp.message = '登录成功';
-                ctx.body = resp;
-                return;
+                ctx.body = {
+                    message: '登录成功'
+                };
             }
         })
     },
