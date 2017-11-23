@@ -3,7 +3,7 @@ const {
 } = require('../errorCode');
 
 module.exports = {
-    'post /user/login': async(ctx, next) => {
+    'post /users': async(ctx, next) => {
         let body = ctx.getReqData();
         console.log('post /user/login body', body);
         let username = body.username;
@@ -46,9 +46,8 @@ module.exports = {
      *  用户名是否被注册
      *  
      */
-    'post /user/regist': async(ctx, next) => {
-        console.log('进入/login/regist');
-        const body = ctx.request.body.data;
+    'post /users': async(ctx, next) => {
+        const body = ctx.getReqData();
         const username = body.username;
         const password = body.password;
         const repassword = body.repassword;
@@ -73,7 +72,6 @@ module.exports = {
         await User.findOne({
             username
         }).then(userInfo => {
-            console.log('userInfo1', userInfo);
             if (userInfo) {
                 //表示数据库中有该记录
                 throw new ApiError(1000);
@@ -83,36 +81,14 @@ module.exports = {
                 username,
                 password
             });
-            console.log('user', user);
-            // let newUserInfo;
-            // (async() => {
-            //     newUserInfo = await user.save();
-            // })();
             let newUserInfo = user.save();
-            console.log('newUserInfo---save', newUserInfo);
             return newUserInfo;
         }).then(newUserInfo => {
             if (newUserInfo) {
                 ctx.rest({
                     message: '注册成功'
                 })
-                console.log('newUserInfo2', newUserInfo);
             }
         })
-    },
-    'get /user': async (ctx, next) => {
-        let query = ctx.query;
-        console.log('get query', query);
-        ctx.rest(query);
-    },
-    'put /user': async (ctx, next) => {
-        let body = ctx.request.body.data;
-        console.log('put body', body);
-        ctx.rest(body);
-    },
-    'delete /user': async (ctx, next) => {
-        let query = ctx.query;
-        console.log('delete query', query);
-        ctx.rest(query);
     }
 };
