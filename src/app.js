@@ -1,5 +1,11 @@
-const Koa = require('koa');
+'use strict';
+
 const path = require('path');
+const Koa = require('koa');
+
+// regist in entry server.js
+const config = global.config;
+
 const serve = require('koa-static');
 const mongoose = require('mongoose');
 const controller = require('../controller');
@@ -17,8 +23,8 @@ global.Promise = require('bluebird');
 mongoose.Promise = global.Promise;
 
 // mongoose.connect(DB_URL, {
-//   useMongoClient: true
-// }, err => {
+  //   useMongoClient: true
+  // }, err => {
 //   if (err) {
 //     console.log('数据库连接失败');
 //   } else {
