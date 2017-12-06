@@ -2,6 +2,8 @@
 
 const path = require('path');
 const Koa = require('koa');
+// 定义在middleware文件夹中
+const Middles = require('../middlewares/');
 
 // regist in entry server.js
 const config = global.config;
@@ -21,16 +23,6 @@ const DB_URL = 'mongodb://localhost:27017/test';
 //使用bluebird mongoose支持promise
 global.Promise = require('bluebird');
 mongoose.Promise = global.Promise;
-
-// mongoose.connect(DB_URL, {
-  //   useMongoClient: true
-  // }, err => {
-//   if (err) {
-//     console.log('数据库连接失败');
-//   } else {
-//     console.log('数据库连接成功');
-//   }
-// });
 
 //promise语法
 mongoose.connect(DB_URL, {
