@@ -50,9 +50,12 @@ app.use(getReqData()); // bind .getReqData for ctx
 
 app.use(restify()); // bind .rest() for ctx
 
-app.use(serve(path.resolve(__dirname, '../../client-summary/dist')));
+// app.use(serve(path.resolve(__dirname, '../../client-summary/dist')));
 
-app.use(controller());
+app.use(Middles.static(path.resolve(__dirname, '../../client-summary/dist')))
+
+// app.use(controller());
+app.use(Middles.router('summary'));
 
 exports.app = app;
 exports.db = db;
