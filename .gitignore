@@ -1,5 +1,3 @@
-config/server.json
-
 /node_modules
 npm-debug.*
 .DS_Store
