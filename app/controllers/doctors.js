@@ -1,6 +1,6 @@
 const {
   ApiError
-} = require('../../error');
+} = require('../error/index');
 
 module.exports = {
   
