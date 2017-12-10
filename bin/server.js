@@ -2,12 +2,9 @@
 
 'use strict';
 
-global.Promise = require('bluebird');
+// 在启动文件 设置全局的promise
+global.Promise = require('bluebird'); 
 
-const utils = require('../src/utils');
-
-const args = utils.parseArg();
-
-const config = global.config = require('../src/config')(args);
-
-require('../src/app').app.listen(config.site.port);
+require('../src/app').app.listen(3000, () => {
+    console.log('server is running at post 3000...');
+});

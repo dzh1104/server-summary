@@ -41,6 +41,6 @@ const restify = (pathPrefix = '') => {
     };
 };
 
-exports.restify = restify;
+module.exports = restify;
 
 // http://mp.weixin.qq.com/s/reM-jWRkp1tHVYzNpTqcDA
