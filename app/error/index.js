@@ -1,4 +1,9 @@
 const mapErrorCode = new Map([
+    // 参数错误
+    [9999, {
+        zhmsg: '参数错误',
+        enmsg: ''
+    }],
     //系统模块
     [2000, {
         zhmsg: '应用未指定错误码',
@@ -27,6 +32,15 @@ const mapErrorCode = new Map([
     }],
     [1005, {
         zhmsg: '两次输入密码不一致',
+        enmsg: ''
+    }],
+    // 患者模块
+    [3000, {
+        zhmsg: '患者姓名为空',
+        enmsg: ''
+    }],
+    [3001, {
+        zhmsg: '患者已存在',
         enmsg: ''
     }]
 ]);

@@ -18,6 +18,8 @@ module.exports = {
         }
 
         const User = require('../models/User');
+        console.log('User', User);
+        console.log('User.test', new User().test);
 
         await User.findOne({
             username

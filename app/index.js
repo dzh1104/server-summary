@@ -3,24 +3,9 @@
 const Koa = require('koa');
 const path = require('path');
 // 定义在middleware文件夹中
-const Middles = require('../middlewares/');
-
-const mongoose = require('mongoose');
-
-const DB_URL = 'mongodb://localhost:27017/test';
-//使用bluebird mongoose支持promise
-mongoose.Promise = global.Promise;
-
-//promise语法
-mongoose.connect(DB_URL, {
-  useMongoClient: true
-}).then(res => {
-  console.log('数据库连接成功');
-}).catch(err => {
-  console.log('数据库连接失败原因', err);
-  console.log('数据库连接失败');
-});
-const db = mongoose.connection;
+const Middles = require('../middlewares');
+// 数据库连接
+require('./mongo');
 
 const app = new Koa();
 
@@ -42,5 +27,4 @@ app.use(Middles.static(path.resolve(__dirname, '../../client-summary/dist')))
 
 app.use(Middles.router());
 
-exports.app = app;
-exports.db = db;
+module.exports = app;
