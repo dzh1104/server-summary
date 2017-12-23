@@ -1,7 +1,3 @@
-const {
-  ApiError
-} = require('../error/index');
+const {ApiError} = require('../error/index');
 
-module.exports = {
-  
-};
+module.exports = {};
