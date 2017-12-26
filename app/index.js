@@ -23,6 +23,8 @@ app.use(Middles.getReqData()); // bind .getReqData for ctx
 
 app.use(Middles.rest()); // bind .rest() for ctx
 
+app.use(Middles.historyMode()); // 在这个地方加入。一定要加在静态文件的serve之前，否则会失效。
+
 app.use(Middles.static(path.resolve(__dirname, '../../client-summary/dist')))
 
 app.use(Middles.router());
